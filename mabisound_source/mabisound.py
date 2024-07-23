@@ -60,8 +60,12 @@ class SoundOperator:
         now = pygame.time.get_ticks()
         self.last = now
 
+    def _check_active_window(self):
+        self.fore = pyautogui.getActiveWindow()
+
     def on_click(self, x, y, button, pressed):
         # 검은사막 켜져있을 때만 키소리 나게함
+        self._check_active_window()
         if self.fore.title[:4] != "검은사막":
             return
 
@@ -74,6 +78,7 @@ class SoundOperator:
 
     def on_press(self, key):
         # 검은사막 켜져있을 때만 키소리 나게함
+        self._check_active_window()
         if self.fore.title[:4] != "검은사막":
             return
 
