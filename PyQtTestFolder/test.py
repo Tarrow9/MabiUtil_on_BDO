@@ -1,4 +1,6 @@
 import sys
+import pyautogui
+
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import Qt 
 from PyQt5 import uic
@@ -7,17 +9,27 @@ from PyQt5 import uic
 #단, UI파일은 Python 코드 파일과 같은 디렉토리에 위치해야한다.
 form_class = uic.loadUiType("test.ui")[0]
 
+class TestClass:
+    def __init__(self):
+        self.a = 1
+    
+    def run(self):
+        for i in range(10):
+            print(self.a)
+            self.a += 1
+
 #화면을 띄우는데 사용되는 Class 선언
 class WindowClass(QMainWindow, form_class) :
     def __init__(self) :
         super().__init__()
         self.setupUi(self)
         self.setWindowFlag(Qt.FramelessWindowHint)
+        self.fore = pyautogui.getActiveWindow()
 
         desktop = QApplication.desktop()
         screenRect = desktop.screenGeometry()
         screenWidth = screenRect.width()
-        self.setGeometry(screenWidth - 300, 100, 200, 200)
+        self.setGeometry(screenWidth - 500, 200, 200, 50)
 
 if __name__ == "__main__" :
     #QApplication : 프로그램을 실행시켜주는 클래스
