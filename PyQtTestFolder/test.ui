@@ -23,14 +23,14 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>80</x>
+      <x>30</x>
       <y>10</y>
-      <width>31</width>
+      <width>111</width>
       <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>00:00</string>
+     <string>00:00test입니당.</string>
     </property>
    </widget>
   </widget>
