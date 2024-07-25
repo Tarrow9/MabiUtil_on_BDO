@@ -34,7 +34,7 @@ class SoundOperator:
         self.mouse_stat = 0 #전체 스탯
         self.RU_gathering_now = 0 #현재 채집을 하고 있는지
         self.last = pygame.time.get_ticks()
-        self.cooldown = 2472
+        self.cooldown = 2372
         self.sound_archive = SoundArchive(path)
         self.fore = pyautogui.getActiveWindow()
 
@@ -76,6 +76,21 @@ class SoundOperator:
                 else:
                     self.sound_archive.clicksound1.play()
 
+    # for gathering cooldown init
+    def on_release(self, key):
+        self._check_active_window()
+        if self.fore.title[:4] != "검은사막":
+            return
+
+        movelist = ['a','w','s','d']
+        #움직임 키 릴리즈시부터 시간 세기
+        try:
+            if key.char in movelist:
+                self._gathering_inittime()
+        except AttributeError:
+            if key == Key.shift:
+                self._gathering_inittime()
+
     def on_press(self, key):
         # 검은사막 켜져있을 때만 키소리 나게함
         self._check_active_window()
@@ -92,7 +107,6 @@ class SoundOperator:
 
             #움직일 시 마우스커서 그냥 없어짐
             elif key.char in movelist:
-                self._gathering_inittime()
                 self.mouse_stat = 0
 
             #마우스 생기게하는 키
@@ -130,5 +144,4 @@ class SoundOperator:
             elif key == Key.f12:
                 self.sound_archive.enchant_success.play()
             elif key == Key.shift:
-                self._gathering_inittime()
                 self.mouse_stat = 0

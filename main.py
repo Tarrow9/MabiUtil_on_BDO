@@ -15,13 +15,13 @@ if __name__=='__main__':
     path = os.path.dirname(os.path.abspath(__file__)) + "\\mabisound_source\\wavfinal"
     sound_operator = SoundOperator(path)
 
-    keyboard_listener = Listener(sound_operator.on_press)
+    keyboard_listener = Listener(on_press=sound_operator.on_press, on_release=sound_operator.on_release)
     mouse_listener = mouse.Listener(on_click = sound_operator.on_click)
 
     keyboard_listener.start()
     mouse_listener.start()
 
-    stop_event.set()
+    # stop_event.set()
 
 # 이곳엔 PyQt5 코드가 들어올 것임미다.
 # 메인을 실행하면 사운드유틸이 스레드로 실행되고
